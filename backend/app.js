@@ -1,12 +1,16 @@
 import express from "express";
 import mongoose from "mongoose";
 import {MongoAPI} from "./cred.js"
-
+import router  from "./routes/user-route.js";
 const app = express();
-mongoose.connect(MongoAPI
-).then(() => app.listen(5000))
+
+app.use(express.json());
+app.use("/api/user",router);
+
+mongoose.connect(MongoAPI)
+.then(() => app.listen(5001))
 .then(() => 
-    console.log("Server is running on port 5000")
+console.log("Server is running on port 5001")
 )
 .catch((error) => console.log(error));
 
