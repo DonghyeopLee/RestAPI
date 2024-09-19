@@ -27,7 +27,14 @@ export const signup = async (req, res, next) => {
         return res.status(400).json({ message: "User already exists"});
     }
     const hashPassword = await bcrypt.hashSync(password);
-    const user= new User({ name, email, password: hashPassword });
+    const user= new User(
+        { 
+            name, 
+            email, 
+            password: hashPassword , 
+            blogs: [],
+
+        });
     
     try{
         await user.save();
@@ -57,3 +64,4 @@ export const login = async (req, res, next) => {
     }
     return res.status(200).json({ message: "Logged in successfully"});
 }
+
